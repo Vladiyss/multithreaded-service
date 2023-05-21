@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      author: Vladiyss
+      id: 01_create_account_table
+      changes:
+        - sqlFile:
+            path: "classpath:db/changelog/create/01_create_account_table.sql"
+
+  - changeSet:
+      author: Vladiyss
+      id: 02_insert_base_accounts_into_account_table
+      changes:
+        - sqlFile:
+            path: "classpath:db/changelog/fill/02_insert_base_accounts_into_account_table.sql"
