@@ -6,12 +6,19 @@ import by.bsuir.vladiyss.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/accounts")
 @RequiredArgsConstructor
 public class AccountController {
 
     private final AccountService accountService;
+
+    @GetMapping
+    public List<Long> findAllAccountIds() {
+        return this.accountService.findAllAccountIds();
+    }
 
     @GetMapping("/account/{id}/balance")
     public Long findAccountBalanceByAccountId(@PathVariable Long id) {
