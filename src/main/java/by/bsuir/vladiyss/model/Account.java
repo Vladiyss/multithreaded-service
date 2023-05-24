@@ -3,9 +3,8 @@ package by.bsuir.vladiyss.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import org.hibernate.generator.EventType;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "account")
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class Account {
 
     @Id
@@ -24,5 +24,6 @@ public class Account {
     private Long balance;
 
     @Column(name = "last_updated_time", nullable = false)
+    @LastModifiedDate
     private LocalDateTime lastUpdatedTime;
 }
