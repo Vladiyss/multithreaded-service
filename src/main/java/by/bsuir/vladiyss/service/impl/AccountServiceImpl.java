@@ -53,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
         this.accountRepository.findById(id).ifPresent(a -> {
             log.info("CHANGING BALANCE: ID - {} :: AMOUNT - {}", id, amount);
 
-            final Long newBalance = a.getBalance() + amount;
+            final long newBalance = a.getBalance() + amount;
             a.setBalance(newBalance);
             this.accountRepository.save(a);
 
