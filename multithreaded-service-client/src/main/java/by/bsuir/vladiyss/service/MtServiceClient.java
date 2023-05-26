@@ -19,6 +19,9 @@ import java.util.stream.IntStream;
 @Slf4j
 public class MtServiceClient {
 
+    private final List<Integer> accountIds = new ArrayList<>();
+    private final RestTemplate restTemplate;
+
     @Value("${concurrency.thread.count}")
     private int THREAD_NUMBER;
     @Value("${multithreadedService.accounts.ids.url}")
@@ -29,8 +32,6 @@ public class MtServiceClient {
     private String MULTITHREADED_SERVICE_ACCOUNTS_CHANGE_BALANCE_URL;
     @Value("${balanceChange.amount}")
     private long BALANCE_CHANGE_AMOUNT;
-    private final List<Integer> accountIds = new CopyOnWriteArrayList<>(); // change to arraylist
-    private final RestTemplate restTemplate;
 
     public void start() {
         accountIds.addAll(this.getAccountIds());
