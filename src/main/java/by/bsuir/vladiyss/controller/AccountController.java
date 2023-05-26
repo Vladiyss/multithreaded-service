@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/accounts")
@@ -26,10 +27,8 @@ public class AccountController {
                 .orElseThrow(() -> new EntityNotFoundException(Account.class.getSimpleName(), id));
     }
 
-    @PatchMapping("/account/{id}/change-balance")
-    public void changeAccountBalance(@PathVariable Long id, final Long amount) {
-        final Account account = this.accountService.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(Account.class.getSimpleName(), id));
-        this.accountService.changeBalance(account, amount);
+    @PostMapping("/account/{id}/change-balance")
+    public void changeAccountBalance(@PathVariable Long id, @RequestBody final Map<String, Long> body) {
+        this.accountService.changeBalance(id, body.get("amount"));
     }
 }
