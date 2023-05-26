@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
     public Optional<Long> findBalance(final Long id) {
         findBalanceCount.incrementAndGet();
 
-        log.info("GETTING BALANCE: ID - {}", id);
+        log.debug("GETTING BALANCE: ID - {}", id);
 
         return Optional.ofNullable(this.accountBalances.get(id))
                 .filter(balance -> balance != Long.MIN_VALUE)
@@ -51,13 +51,13 @@ public class AccountServiceImpl implements AccountService {
         changeBalanceCount.incrementAndGet();
 
         this.accountRepository.findById(id).ifPresent(a -> {
-            log.info("CHANGING BALANCE: ID - {} :: AMOUNT - {}", id, amount);
+            log.debug("CHANGING BALANCE: ID - {} :: AMOUNT - {}", id, amount);
 
             final long newBalance = a.getBalance() + amount;
             a.setBalance(newBalance);
             this.accountRepository.save(a);
 
-            log.info("CHANGING BALANCE: ID - {} :: AMOUNT - {} - SUCCESS", id, amount);
+            log.debug("CHANGING BALANCE: ID - {} :: AMOUNT - {} - SUCCESS", id, amount);
 
             this.accountBalances.put(a.getId(), newBalance);
         });

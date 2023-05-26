@@ -12,9 +12,9 @@
         </encoder>
     </appender>
 
-    <appender name="FILE"
+    <appender name="FILE_STATS"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>multithreaded-service.log</file>
+        <file>multithreaded-service-stats.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>TRACE</level>
             <onMatch>ACCEPT</onMatch>
@@ -22,9 +22,30 @@
         </filter>
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>multithreaded-service.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <fileNamePattern>multithreaded-service-stats.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                 class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_LOGS"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>multithreaded-service-logs.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>multithreaded-service-logs.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>20MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
@@ -37,11 +58,11 @@
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="by.bsuir.vladiyss.service.impl" level="INFO" additivity="false">
-        <appender-ref ref="STDOUT" />
+    <logger name="by.bsuir.vladiyss.service.impl" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE_LOGS" />
     </logger>
 
     <logger name="by.bsuir.vladiyss.service.impl" level="TRACE" additivity="false">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE_STATS" />
     </logger>
 </configuration>

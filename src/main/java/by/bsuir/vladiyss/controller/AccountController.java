@@ -16,7 +16,7 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping
+    @GetMapping("/ids")
     public List<Long> findAllAccountIds() {
         return this.accountService.findAllAccountIds();
     }
